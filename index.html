@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Trézór Suite: The ultimate software for managing your Trézór Hardware Wallet. Securely store, trade, and track your cryptocurrencies with ease.">
+  <meta name="keywords" content="Trézór Suite, Trézór Wallet, Trézór Hardware Wallet, Trézór Crypto, Trézór.io/start, Hardware Wallet Trézór, Trézór Support, Trézór Install">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Trézór Suite: Secure Crypto Management">
+  <meta property="og:description" content="Discover Trézór Suite, the user-friendly platform for managing your Trézór Hardware Wallet. Secure your crypto today!">
+  <meta property="og:url" content="https://suite-trexo-help.github.io/en-us">
+  <meta property="og:image" content="https://suite-trexo-help.github.io/en-us/Trézór-suite.jpg">
+  <title>Trézór Suite: Secure Crypto Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
+  <!-- JSON-LD Schema Markup -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "Trézór Suite",
+          "description": "Trézór Suite is a secure software platform for managing your Trézór Hardware Wallet, offering portfolio tracking, trading, and enhanced privacy features.",
+          "applicationCategory": "Finance",
+          "operatingSystem": "Windows, macOS, Linux, Android, iOS",
+          "url": "https://Trézór.io/Trézór-suite",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How do I set up Trézór Suite?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Visit Trézór.io/start to download Trézór Suite, connect your Trézór Hardware Wallet, install firmware, back up your recovery seed, set a PIN, and activate cryptocurrencies."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What support options are available for Trézór Suite?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Trézór Support offers live chat via Hal, a knowledge base on Trézór.io, community forums, and 1:1 onboarding sessions for Trézór Wallet Setup."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  </script>
+  <style>
+    body {
+      background-color: #2D2D2D;
+      color: #E0E0E0;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 400;
+      overflow-x: hidden;
+    }
+    h1, h2, h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      color: #39FF14;
+    }
+    p, li, a {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 400;
+    }
+    .btn {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 500;
+    }
+    .hero {
+      height: 100vh;
+      background: linear-gradient(135deg, #1A3C34 0%, #2D2D2D 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    .navbar {
+      position: sticky;
+      top: 0;
+      background: rgba(26, 60, 52, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      z-index: 1000;
+    }
+    .nav-link {
+      color: #E0E0E0;
+      margin: 0 1rem;
+      transition: color 0.3s ease;
+      font-weight: 400;
+    }
+    .nav-link:hover {
+      color: #39FF14;
+      text-shadow: 0 0 10px #39FF14;
+    }
+    .section {
+      padding: 5rem 2rem;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.8s ease-out;
+    }
+    .card {
+      background: rgba(26, 60, 52, 0.7);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 1rem;
+      margin: 1rem 0;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+    .btn {
+      background: linear-gradient(45deg, #39FF14, #FFD700);
+      color: #1A3C34;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 0 15px rgba(57, 255, 20, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px rgba(57, 255, 20, 0.8);
+    }
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #1A3C34;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      transition: opacity 0.5s ease;
+    }
+    .preloader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    @media (max-width: 768px) {
+      .navbar .-nav-links {
+        display: none;
+      }
+      .navbar .btn {
+        margin-left: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Preloader -->
+  <div class="preloader">
+    <svg width="100" height="100" viewBox="0 0 100 100" class="animate-spin">
+      <circle cx="50" cy="50" r="40" stroke="#39FF14" stroke-width="8" fill="none" />
+    </svg>
+  </div>
+
+  <!-- Navbar with Button -->
+  <nav class="navbar">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-neon-green">Trézór Suite</h1>
+      <div class="flex items-center">
+        <div class="nav-links space-x-4">
+          <a href="#home" class="nav-link">Home</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#setup" class="nav-link">Setup</a>
+          <a href="#support" class="nav-link">Support</a>
+        </div>
+        <a href="/setup" class="btn ml-6">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <canvas class="hero-canvas" id="hero-canvas"></canvas>
+    <div class="relative z-10">
+      <h1 class="text-6xl font-bold mb-4 animate-pulse">Trézór Suite</h1>
+      <p class="text-2xl mb-6 text-gray-200">Your Secure Gateway to <a href="https://Trézór.io/" target="_blank" class="underline text-neon-green">Trézór Crypto</a></p>
+      <a href="/setup" class="btn">Start with Trézór Suite</a>
+    </div>
+  </section>
+
+  <!-- About Trézór Suite -->
+  <section id="about" class="section">
+    <div class="container mx-auto">
+      <h2 class="text-4xl font-semibold text-center mb-8">What is Trézór Suite?</h2>
+      <p class="text-lg mb-6">Trézór Suite is the premier software platform for your <a href="/hardware-wallet" class="text-neon-green underline">Trézór Hardware Wallet</a>. Created by SatoshiLabs, it provides a sleek, intuitive interface for managing cryptocurrencies securely. Whether you're a beginner or an experienced trader, <strong>Trézór Suite</strong> streamlines portfolio management, trading, and privacy.</p>
+      <div class="card" data-tilt>
+        <h3 class="text-2xl font-medium mb-4">Why Choose Trézór Suite?</h3>
+        <ul class="list-disc ml-6">
+          <li>Real-time dashboard for your <strong>Trézór Wallet</strong>.</li>
+          <li>Supports over 1,000 cryptocurrencies, including Bitcoin and Ethereum.</li>
+          <li>Advanced privacy with CoinJoin and Tor integration.</li>
+          <li>Quick setup via <a href="https://Trézór.io/start" target="_blank" class="text-neon-green underline">Trézór.io/start</a>.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="section">
+    <div class="container mx-auto">
+      <h2 class="text-4xl font-semibold text-center mb-8">Key Features of Trézór Suite</h2>
+      <p class="text-lg mb-6">Learn why <strong>Trézór Suite</strong> is the top choice for managing your <strong>Trézór Crypto</strong> assets.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="card" data-tilt>
+          <h3 class="text-2xl font-medium mb-4">Offline Security</h3>
+          <p>Protect your private keys with your <strong>Hardware Wallet Trézór</strong>.</p>
+        </div>
+        <div class="card" data-tilt>
+          <h3 class="text-2xl font-medium mb-4">Portfolio Tracking</h3>
+          <p>Manage your crypto with <strong>Trézór Suite</strong>’s elegant interface.</p>
+        </div>
+        <div class="card" data-tilt>
+          <h3 class="text-2xl font-medium mb-4">Trade Crypto</h3>
+          <p>Buy and sell directly in <strong>Trézór Suite</strong> via Invity.io.</p>
+        </div>
+        <div class="card" data-tilt>
+          <h3 class="text-2xl font-medium mb-4">Mobile Compatibility</h3>
+          <p>Access your portfolio anywhere with Trézór Suite Lite.</p>
+        </div>
+      </div>
+      <p class="text-center mt-6"><a href="/features" class="text-neon-green underline">Explore More Trézór Suite Features</a></p>
+    </div>
+  </section>
+
+  <!-- Setup Guide -->
+  <section id="setup" class="section">
+    <div class="container mx-auto">
+      <h2 class="text-4xl font-semibold text-center mb-8">How to Set Up Trézór Suite</h2>
+      <p class="text-lg mb-6">Get started with your <strong>Trézór Wallet Setup</strong> in minutes:</p>
+      <ol class="list-decimal ml-6 mb-6">
+        <li>Go to <a href="https://Trézór.io/start" target="_blank" class="text-neon-green underline">Trézór.io/start</a> to download <strong>Trézór Suite</strong>.</li>
+        <li>Connect your <strong>Trézór Hardware</strong> using a USB cable.</li>
+        <li>Complete the <strong>Totone Install</strong> and firmware setup.</li>
+        <li>Securely back up your recovery seed offline.</li>
+        <li>Create a PIN for your <strong>Trézór Wallet</strong>.</li>
+        <li>Select cryptocurrencies to manage.</li>
+      </ol>
+      <p>Visit our <a href="/blog/Trézór-setup-guide" class="text-neon-green underline">Trézór Setup Blog</a> for detailed tips.</p>
+    </div>
+  </section>
+
+  <!-- Support Section -->
+  <section id="support" class="section">
+    <div class="container mx-auto">
+      <h2 class="text-4xl font-semibold text-center mb-8">Trézór Support</h2>
+      <p class="text-lg mb-6">Need help with <strong>Trézór Suite</strong> or <strong>Trézór Hardware</strong>? Explore our support options.</p>
+      <div class="card" data-tilt>
+        <ul class="list-disc ml-6">
+          <li><strong>Live Chat</strong>: Connect with <a href="https://Trézór.io/support" target="_blank" class="text-neon-green underline">Trézór Support</a> via Hal.</li>
+          <li><strong>Knowledge Base</strong>: Find guides on <strong>Trézór.io</strong>.</li>
+          <li><strong>Community Forums</strong>: Engage with <strong>Trézór Crypto</strong> users.</li>
+          <li><strong>Personalized Help</strong>: Book 1:1 sessions for <strong>Trézór Wallet Setup</strong>.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section text-center">
+    <div class="container mx-auto">
+      <h2 class="text-4xl font-semibold mb-8">Join the Trézór Revolution</h2>
+      <p class="text-lg mb-6">Take control of your crypto with <strong>Trézór Suite</strong> today!</p>
+      <a href="https://Trézór.io/" target="_blank" class="btn">Visit Trézór.io</a>
+    </div>
+  </section>
+
+  <script>
+    // Preloader
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.querySelector('.preloader').classList.add('hidden');
+      }, 2000);
+    });
+
+    // Three.js Hero Animation (Simplified Crypto Coin)
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('hero-canvas'), alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    const geometry = new THREE.TorusGeometry(1, 0.4, 16, 100);
+    const material = new THREE.MeshBasicMaterial({ color: 0x39FF14 });
+    const coin = new THREE.Mesh(geometry, material);
+    scene.add(coin);
+    camera.position.z = 5;
+    function animate() {
+      requestAnimationFrame(animate);
+      coin.rotation.x += 0.01;
+      coin.rotation.y += 0.01;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // GSAP Animations
+    gsap.registerPlugin(ScrollTrigger);
+    document.querySelectorAll('.section').forEach(section => {
+      gsap.to(section, {
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          toggleClass: "visible",
+          once: true
+        }
+      });
+    });
+    gsap.from(".hero h1", { opacity: 0, y: -100, duration: 1, delay: 0.5 });
+    gsap.from(".hero p", { opacity: 0, y: 100, duration: 1, delay: 1 });
+    gsap.from(".hero .btn", { opacity: 0, scale: 0.5, duration: 1, delay: 1.5 });
+
+    // Tilt.js for Cards
+    VanillaTilt.init(document.querySelectorAll(".card"), {
+      max: 15,
+      speed: 400,
+      glare: true,
+      "max-glare": 0.5
+    });
+  </script>
+</body>
+</html>
